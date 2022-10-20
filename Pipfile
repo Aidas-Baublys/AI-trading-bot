@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 yfinance = "*"
 matplotlib = "*"
+statsmodels = "*"
+alpaca-trade-api = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

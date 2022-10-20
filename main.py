@@ -1,6 +1,11 @@
+import os
 import yfinance as yf
 import pandas as pd
 from matplotlib import pyplot as plt
+from statsmodels.tsa.arima.model import ARIMA
+from dotenv import load_dotenv
+
+load_dotenv()
 
 google = yf.Ticker("GOOG")
 
@@ -22,3 +27,10 @@ plt.plot(range(0, len(y_train)), y_train, label="Train")
 plt.plot(range(len(y_train), len(y)), y_test, label="Test")
 plt.legend()
 plt.show()
+
+model = ARIMA(y_train, order=(5, 0, 1)).fit()
+forecast = model.forecast(steps=1)[0]
+
+print(f"Real data for time 0: {y_train[len(y_train)-1]}")
+print(f"Real data for time 1: {y_test[0]}")
+print(f"Pred data for time 1: {forecast}")

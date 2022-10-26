@@ -9,6 +9,8 @@ matplotlib = "*"
 statsmodels = "*"
 alpaca-trade-api = "*"
 python-dotenv = "*"
+tensorflow = "*"
+scikit-learn = "*"
 
 [dev-packages]
 

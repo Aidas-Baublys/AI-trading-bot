@@ -2,42 +2,51 @@ import os
 import yfinance as yf
 import pandas as pd
 from matplotlib import pyplot as plt
-from statsmodels.tsa.arima.model import ARIMA
 from dotenv import load_dotenv
 import alpaca_trade_api as alpaca
+import numpy as np
+import time as tm
+import datetime as dt
+import tensorflow as tf
+from sklearn.preprocessing import MinMaxScaler
+from collections import deque
+from keras.models import Sequential
+from keras.layers import Dense, LSTM, Dropout
+
 
 load_dotenv()
-
-google = yf.Ticker("GOOG")
-
-df = google.history(period="1d", interval="1m")[["Low"]]
-df["date"] = pd.to_datetime(df.index).time
-df.set_index("date", inplace=True)
-
-X = df.index.values
-y = df["Low"].values
-
-offset = int(0.10 * len(df))
-
-X_train = X[:-offset]
-y_train = y[:-offset]
-X_test = X[-offset:]
-y_test = y[-offset:]
-
-# plt.plot(range(0, len(y_train)), y_train, label="Train")
-# plt.plot(range(len(y_train), len(y)), y_test, label="Test")
-# plt.legend()
-# plt.show()
-
-model = ARIMA(y_train, order=(5, 0, 1)).fit()
-forecast = model.forecast(steps=1)[0]
-
-print(f"Real data for time 0: {y_train[len(y_train)-1]}")
-print(f"Real data for time 1: {y_test[0]}")
-print(f"Pred data for time 1: {forecast}")
 
 # PAPER_TRADING_URL = os.getenv("PAPER_TRADING_URL")
 # ALPACA_KEY_ID = os.getenv("ALPACA_KEY_ID")
 # ALPACA_SECRET_KEY = os.getenv("ALPACA_SECRET_KEY")
 
-# api = alpaca.REST(ALPACA_KEY_ID, ALPACA_SECRET_KEY, base_url=PAPER_TRADING_URL)  # type: ignore
+# Window size or the sequence length, 7 (1 week)
+# N_STEPS = 7
+
+lookuo_steps = [1, 2, 3]
+
+stock = "GOOG"
+
+date_now = tm.strftime("%Y-%m-%d")
+date_3_years_back = (dt.date.today() - dt.timedelta(days=1104)).strftime("%Y-%m-%d")
+
+init_df = yf.Ticker(stock).history(interval="1d", start=date_3_years_back, end=date_now)
+
+init_df = init_df.drop(
+    ["Open", "High", "Low", "Volume", "Dividends", "Stock Splits"], axis=1
+)
+init_df["Date"] = init_df.index
+
+
+# plt.style.use(style="ggplot")
+# plt.figure(figsize=(16, 10))
+# plt.plot(init_df["Close"][-200:])
+# plt.xlabel("days")
+# plt.ylabel("price")
+# plt.legend([f"Actual price for {stock}"])
+# plt.show()
+
+scaler = MinMaxScaler()
+init_df["Close"] = scaler.fit_transform(np.expand_dims(init_df["close"].values, axis=1))
+
+print(init_df)

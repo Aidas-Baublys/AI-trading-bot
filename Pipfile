@@ -11,6 +11,7 @@ alpaca-trade-api = "*"
 python-dotenv = "*"
 tensorflow = "*"
 scikit-learn = "*"
+pandas-ta = "*"
 
 [dev-packages]
 

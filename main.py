@@ -1,9 +1,6 @@
-import os
 import yfinance as yf
 import pandas as pd
 from matplotlib import pyplot as plt
-from dotenv import load_dotenv
-import alpaca_trade_api as alpaca
 import numpy as np
 import time as tm
 import datetime as dt
@@ -13,12 +10,6 @@ from collections import deque
 from keras.models import Sequential
 from keras.layers import Dense, LSTM, Dropout
 
-
-load_dotenv()
-
-# PAPER_TRADING_URL = os.getenv("PAPER_TRADING_URL")
-# ALPACA_KEY_ID = os.getenv("ALPACA_KEY_ID")
-# ALPACA_SECRET_KEY = os.getenv("ALPACA_SECRET_KEY")
 
 stock = "GOOG"
 date_now = tm.strftime("%Y-%m-%d")

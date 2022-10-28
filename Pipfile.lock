@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "01b09ebf64d6ba4baea52b694fb0d77304356c1b7f5aa652da3a5cf03f405e22"
+            "sha256": "88dbbdf84543cb2d2d9861a30580f960e477d80c19d2b2ed47428a00422d6a6e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -264,9 +264,10 @@
         },
         "flatbuffers": {
             "hashes": [
-                "sha256:fc30f024e2eee55922d610f4d68626002fcd3c8f87d8058ec5ae9edd86993bcb"
+                "sha256:8698aaa635ca8cf805c7d8414d4a4a8ecbffadca0325fa60551cb3ca78612356",
+                "sha256:e36d5ba7a5e9483ff0ec1d238fdc3011c866aab7f8ce77d5e9d445ac12071d84"
             ],
-            "version": "==22.9.24"
+            "version": "==22.10.26"
         },
         "fonttools": {
             "hashes": [
@@ -946,6 +947,13 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==1.5.1"
+        },
+        "pandas-ta": {
+            "hashes": [
+                "sha256:0fa35aec831d2815ea30b871688a8d20a76b288a7be2d26cc00c35cd8c09a993"
+            ],
+            "index": "pypi",
+            "version": "==0.3.14b0"
         },
         "patsy": {
             "hashes": [

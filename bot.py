@@ -8,8 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PAPER_TRADING_URL = os.getenv("PAPER_TRADING_URL")
-ALPACA_KEY_ID = os.getenv("ALPACA_KEY_ID")
-ALPACA_SECRET_KEY = os.getenv("ALPACA_SECRET_KEY")
+PAPER_ALPACA_KEY_ID = os.getenv("PAPER_ALPACA_KEY_ID")
+PAPER_ALPACA_SECRET_KEY = os.getenv("PAPER_ALPACA_SECRET_KEY")
 TELEGRAM_URL = os.getenv("TELEGRAM_URL")
 TELEGRAM_BOT_NAME = os.getenv("TELEGRAM_BOT_NAME")
 TELEGRAM_BOT_ID = os.getenv("TELEGRAM_BOT_ID")
@@ -148,7 +148,7 @@ def predict(stock):
 
 
 def activate_trader(request):
-    trader_api = alpaca.REST(ALPACA_KEY_ID, ALPACA_SECRET_KEY, PAPER_TRADING_URL)  # type: ignore
+    trader_api = alpaca.REST(PAPER_ALPACA_KEY_ID, PAPER_ALPACA_SECRET_KEY, PAPER_TRADING_URL)  # type: ignore
     account = trader_api.get_account()
     clock = trader_api.get_clock()
 
